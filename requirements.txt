@@ -1,0 +1,7 @@
+opencv-python
+numpy
+rapidocr-onnxruntime
+Pillow
+# 可选：scrcpy 高帧率预览（命名管道 + 解码）
+pywin32; sys_platform == 'win32'
+av
