@@ -170,11 +170,14 @@ class LiveScreen:
                 if self.scrcpy_path and os.name == "nt":
                     n = self._run_scrcpy()
                     fps_n += n
+                    if n == 0:
+                        time.sleep(1.0)  # scrcpy 秒退时避免忙等
                 else:
                     self._log("无 scrcpy，使用截图模式")
                     fps_n += self._run_screencap_loop()
             except Exception as e:
                 self._log(f"影像源异常: {type(e).__name__}: {e}")
+                time.sleep(1.0)
             if self._stop.is_set():
                 break
             # 短暂回退截图，避免完全黑屏
@@ -224,6 +227,15 @@ class LiveScreen:
             "--video-bit-rate=8M",
             "--stay-awake",
         ]
+        # 限制分辨率（格式 WxH，保持宽高比）降低带宽
+        if self.size and "x" in self.size.lower():
+            try:
+                w_s, h_s = self.size.lower().split("x", 1)
+                max_side = max(int(w_s), int(h_s))
+                if max_side > 0:
+                    cmd += [f"--max-size={max_side}"]
+            except Exception:
+                pass
         # 熄屏运行：手机屏幕关掉，但仍推流给本程序（scrcpy 官方能力）
         if self.screen_off:
             cmd.append("--turn-screen-off")
