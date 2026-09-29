@@ -108,23 +108,18 @@ class OcrBox:
 # --------------------------- ADB ---------------------------
 
 def find_adb() -> str:
-    """查找 adb：优先 PATH，其次常见目录与程序旁 platform-tools。"""
     hit = which("adb") or which("adb.exe")
     if hit:
         return hit
     for p in (
         Path(os.environ.get("LOCALAPPDATA", "")) / "Android" / "platform-tools" / "adb.exe",
         Path(os.environ.get("ANDROID_HOME", "")) / "platform-tools" / "adb.exe",
-        Path(os.environ.get("ANDROID_SDK_ROOT", "")) / "platform-tools" / "adb.exe",
         Path(r"C:\platform-tools\adb.exe"),
         SCRIPT_DIR / "platform-tools" / "adb.exe",
         SCRIPT_DIR / "adb.exe",
     ):
-        try:
-            if p.is_file():
-                return str(p)
-        except Exception:
-            pass
+        if p.is_file():
+            return str(p)
     return "adb"
 
 
@@ -341,14 +336,20 @@ def find_and_click(screen: np.ndarray, boxes: list[OcrBox]) -> Optional[str]:
 
 
 def is_live_room(boxes: list[OcrBox], sh: int) -> bool:
-    top = sh * 0.25
+    top = sh * 0.18
+    has_follow = False
+    has_live = False
     for b in boxes:
         if b.cy > top:
             continue
         t = normalize(b.text)
-        if t in ("关注", "更多直播") or "更多直播" in t or t == "正在直播":
+        if "更多直播" in t or t == "正在直播" or t.endswith("的直播间"):
             return True
-    return False
+        if t == "关注":
+            has_follow = True
+        if "直播" in t:
+            has_live = True
+    return has_follow and has_live
 
 
 def is_in_ad(boxes: list[OcrBox]) -> bool:
