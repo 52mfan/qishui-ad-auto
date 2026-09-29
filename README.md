@@ -22,14 +22,14 @@
 
 <br/>
 
-[![GitHub release](https://img.shields.io/github/v/release/52mfan/qishui-ad-auto?style=for-the-badge&color=FF4D4F&label=RELEASE)](https://github.com/52mfan/qishui-ad-auto/releases)
-[![Stars](https://img.shields.io/github/stars/52mfan/qishui-ad-auto?style=for-the-badge&color=FFD700&logo=github)](https://github.com/52mfan/qishui-ad-auto/stargazers)
-[![Forks](https://img.shields.io/github/forks/52mfan/qishui-ad-auto?style=for-the-badge&color=00B894&logo=github)](https://github.com/52mfan/qishui-ad-auto/network)
-[![Issues](https://img.shields.io/github/issues/52mfan/qishui-ad-auto?style=for-the-badge&color=6C5CE7)](https://github.com/52mfan/qishui-ad-auto/issues)
+[![GitHub release](https://img.shields.io/github/v/release/windses/qishui-ad-auto?style=for-the-badge&color=FF4D4F&label=RELEASE)](https://github.com/windses/qishui-ad-auto/releases)
+[![Stars](https://img.shields.io/github/stars/windses/qishui-ad-auto?style=for-the-badge&color=FFD700&logo=github)](https://github.com/windses/qishui-ad-auto/stargazers)
+[![Forks](https://img.shields.io/github/forks/windses/qishui-ad-auto?style=for-the-badge&color=00B894&logo=github)](https://github.com/windses/qishui-ad-auto/network)
+[![Issues](https://img.shields.io/github/issues/windses/qishui-ad-auto?style=for-the-badge&color=6C5CE7)](https://github.com/windses/qishui-ad-auto/issues)
 
 <br/>
 
-**[`🔥 一键下载`](https://github.com/52mfan/qishui-ad-auto/releases)** ─── **[`⚡ 快速开始`](#-光速上手)** ─── **[`🧠 原理`](#-工作原理)** ─── **[`📚 文档`](#-文档)** ─── **[`❓ FAQ`](#-faq)**
+**[`🔥 一键下载`](https://github.com/windses/qishui-ad-auto/releases)** ─── **[`⚡ 快速开始`](#-光速上手)** ─── **[`🧠 原理`](#-工作原理)** ─── **[`📚 文档`](#-文档)** ─── **[`❓ FAQ`](#-faq)**
 
 </div>
 
@@ -159,7 +159,7 @@ flowchart TB
 ### 1️⃣ 安装
 
 ```bash
-git clone https://github.com/52mfan/qishui-ad-auto.git
+git clone https://github.com/windses/qishui-ad-auto.git
 cd qishui-ad-auto
 pip install -r requirements.txt
 ```
@@ -168,7 +168,7 @@ pip install -r requirements.txt
 <summary>📦 <b>不想装 Python？直接下 EXE</b></summary>
 <br/>
 
-👉 [Releases 页面](https://github.com/52mfan/qishui-ad-auto/releases) → 下载 `QishuiAdGUI.exe` → 双击运行
+👉 [Releases 页面](https://github.com/windses/qishui-ad-auto/releases) → 下载 `QishuiAdGUI.exe` → 双击运行
 
 </details>
 
@@ -290,8 +290,8 @@ POLL_INTERVAL  = 1.2     # 轮询秒数
 
 <br/>
 
-[![GitHub stars](https://img.shields.io/github/stars/52mfan/qishui-ad-auto?style=social)](https://github.com/52mfan/qishui-ad-auto/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/52mfan/qishui-ad-auto?style=social)](https://github.com/52mfan/qishui-ad-auto/network)
+[![GitHub stars](https://img.shields.io/github/stars/windses/qishui-ad-auto?style=social)](https://github.com/windses/qishui-ad-auto/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/windses/qishui-ad-auto?style=social)](https://github.com/windses/qishui-ad-auto/network)
 
 </div>
 
@@ -318,6 +318,6 @@ POLL_INTERVAL  = 1.2     # 轮询秒数
 
 <br/>
 
-![Visitors](https://komarev.com/ghpvc/?username=52mfan&label=visitors&color=FF4D4F&style=for-the-badge)
+![Visitors](https://komarev.com/ghpvc/?username=windses&label=visitors&color=FF4D4F&style=for-the-badge)
 
 </div>
