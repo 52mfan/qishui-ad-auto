@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# 运行产物
+debug_clicks/
+*.log
+*.png
+*.jpg
+*.mp4
+*.mkv
+*.h264
+
+# scrcpy（体积大，请自行下载）
+scrcpy/
+scrcpy-pack/
+
+# IDE
+.idea/
+.vscode/
+.DS_Store
+
+# 系统
+Thumbs.db
