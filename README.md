@@ -1,317 +1,250 @@
 <div align="center">
 
-# 🥤 汽水音乐 · 自动看广告
+<img src="https://img.shields.io/badge/QISHUI-AD--AUTO-0A0A0A?style=for-the-badge&labelColor=FF4D4F&color=0A0A0A" alt="qishui-ad-auto" />
 
-**ADB + OCR 驱动的「看广告领时长」自动化助手**
+### 汽水音乐 · 自动看广告
 
-一键识别领取按钮 · 倒计时智能等待 · 直播间秒退 · 防检测点击抖动
+让「看广告领时长」这件事，交给脚本。
 
-[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)]()
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![OpenCV](https://img.shields.io/badge/OpenCV-4.x-5C3EE8?logo=opencv&logoColor=white)](https://opencv.org/)
-[![OCR](https://img.shields.io/badge/RapidOCR-PaddleOCR%20ONNX-orange)](https://github.com/RapidAI/RapidOCR)
-[![Stars](https://img.shields.io/github/stars/52mfan/qishui-ad-auto?style=social)](https://github.com/52mfan/qishui-ad-auto/stargazers)
+**识别 · 等待 · 点击 · 挂机** 一气呵成
 
-[功能特性](#-功能特性) ·
-[快速开始](#-快速开始) ·
-[工作原理](#-工作原理) ·
-[使用教程](#-详细文档) ·
-[常见问题](#-常见问题) ·
-[免责声明](#-免责声明)
+<br />
+
+[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.x-5C3EE8?style=flat-square&logo=opencv&logoColor=white)](https://opencv.org)
+[![RapidOCR](https://img.shields.io/badge/RapidOCR-ONNX-FF6B00?style=flat-square&logo=paddlepaddle&logoColor=white)](https://github.com/RapidAI/RapidOCR)
+[![License](https://img.shields.io/badge/License-MIT-2ECC71?style=flat-square)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?style=flat-square&logo=windows&logoColor=white)]()
+
+[![Stars](https://img.shields.io/github/stars/52mfan/qishui-ad-auto?style=flat-square&color=FFD700)](https://github.com/52mfan/qishui-ad-auto/stargazers)
+[![Forks](https://img.shields.io/github/forks/52mfan/qishui-ad-auto?style=flat-square)](https://github.com/52mfan/qishui-ad-auto/network/members)
+
+**[`文档`](docs/) · [`快速开始`](#-quick-start) · [`特性`](#-features) · [`FAQ`](#-faq) · [`免责声明`](#-disclaimer)**
 
 </div>
 
 ---
 
-## ✨ 一句话
+## Why · 为什么需要它
 
-> 打开汽水音乐「看广告领时长」页面后，本工具用 **OCR 识别屏幕**，自动点击  
-> **领取奖励 / 继续观看 / 领取成功**，并处理倒计时、直播间误入、卡死等情况，  
-> 让挂机更省心、更像真人。
+看广告领时长，流程其实很无聊：
+
+> 广告倒计时 → 等「领取奖励」→ 点一下 → 再来一轮 → 不小心进了直播间还得手动退出…
+
+重复、费眼、容易漏。  
+**qishui-ad-auto** 把这套动作自动化：OCR 读懂屏幕，到点就点，出错就退，挂上就能走。
 
 ---
 
-## 🎯 功能特性
+## Features
+
+<br/>
 
 <table>
 <tr>
-<td width="50%" valign="top">
-
-### 🧠 智能识别
-- **OCR 按钮识别** — RapidOCR 中文识别，置信度可调
-- **倒计时解析** — 「14秒后可领奖励」→ 精确等待后再点击
-- **防误点** — 倒计时文案、解说词不会被当成按钮
-- **模糊匹配** — 容忍 OCR 错字、缺字、尾部符号
-
+<td align="center" width="33%">
+  <img src="https://img.shields.io/badge/%F0%9F%A7%A0-OCR-FF4D4F?style=for-the-badge&labelColor=1A1A1A" /><br/><br/>
+  <b>看得懂</b><br/>
+  本地 OCR 识别「领取奖励」等按钮<br/>容忍错字、尾部符号
 </td>
-<td width="50%" valign="top">
-
-### ⚡ 稳定挂机
-- **直播间秒退** — 顶部「关注 / 更多直播」立即返回
-- **防卡死兜底** — 连续未命中自动返回，广告中不误触
-- **坐标自适应** — 影像分辨率 ≠ 真机时自动换算
-- **点击抖动** — 坐标 ±6px、间隔随机，降低脚本特征
-
+<td align="center" width="33%">
+  <img src="https://img.shields.io/badge/%E2%8F%B3-智能等待-00B894?style=for-the-badge&labelColor=1A1A1A" /><br/><br/>
+  <b>等得准</b><br/>
+  解析「14秒后可领奖励」<br/>倒计时结束立刻点击
 </td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### 🖥️ 现代 GUI
-- 实时手机画面预览（scrcpy 约 30 FPS）
-- OCR 命中框可视化 · 识别信息表
-- 手机状态：机型 / 电量 / 充电 / 网络 / IP
-- WiFi ADB 无线连接 · 熄屏运行
-
-</td>
-<td width="50%" valign="top">
-
-### 🛠️ 工程友好
-- GUI / CLI 双形态，可打单文件 EXE
-- 详细中文文档（手机设置 → 环境 → 使用 → 打包）
-- MIT 开源协议 · 无账号体系 · 无遥测
-
+<td align="center" width="33%">
+  <img src="https://img.shields.io/badge/%F0%9F%9B%A1-%E9%98%B2%E6%A3%80%E6%B5%8B-6C5CE7?style=for-the-badge&labelColor=1A1A1A" /><br/><br/>
+  <b>点得像人</b><br/>
+  坐标抖动 · 间隔浮动 · 微延迟
 </td>
 </tr>
 </table>
 
----
-
-## 📸 界面一览
-
-```
-┌────────────────────────┬──────────────────────────┐
-│                        │  手机信息                 │
-│    实时影像预览         │  Xiaomi M2007J1SC         │
-│    （scrcpy H.264）    │  Android 13 · 1080x2340   │
-│                        │  电量 97% · 充电中        │
-│    [领取奖励] ◉ 命中   │  WiFi · IP 192.168.x.x    │
-│                        ├──────────────────────────┤
-│                        │  重点识别                 │
-│                        │  领取奖励   1.00  (542,1235) │
-│                        │  继续观看   0.99  (892,134)  │
-│                        ├──────────────────────────┤
-│                        │  运行日志                 │
-│                        │  🎯 点击「领取奖励」…     │
-│                        │  ⏱ 广告倒计时 3s…         │
-└────────────────────────┴──────────────────────────┘
-```
+| | |
+|:--|:--|
+| 🖥 **双形态** | GUI 预览面板 + 轻量 CLI |
+| 📺 **实时画面** | 可选 scrcpy，约 30 FPS |
+| 🚪 **直播间秒退** | 顶部「关注 / 更多直播」立即返回 |
+| 🔋 **状态面板** | 机型 / 电量 / 网络 / WiFi ADB |
+| 📱 **熄屏挂机** | scrcpy 熄屏推流，手机可以扣着放 |
+| 📦 **可打 EXE** | 单文件发布，免装 Python |
 
 ---
 
-## 🧩 工作原理
+## Architecture
 
 ```mermaid
-flowchart LR
-    A[ADB 截屏 / scrcpy 推流] --> B[RapidOCR 文字识别]
-    B --> C{命中目标按钮?}
-    C -->|是| D[坐标换算 + 随机抖动]
-    D --> E[ADB tap 点击]
-    E --> F[进入下一广告/领奖]
-    C -->|否 · 倒计时| G[解析 N 秒后可领]
-    G --> H[休眠 N 秒后立刻探查]
-    C -->|否 · 直播间| I[顶部关注/更多直播 → 返回]
-    C -->|否 · 连续未命中| J[防卡死返回]
-    F --> B
-    H --> B
-    I --> B
-    J --> B
+flowchart TB
+    subgraph Phone
+        P[汽水音乐 · 看广告页面]
+    end
+    subgraph Capture
+        S[scrcpy H.264 流<br/>或 screencap 截图]
+    end
+    subgraph Brain
+        O[RapidOCR 本地识别]
+        R[目标匹配 / 倒计时解析]
+    end
+    subgraph Action
+        T[坐标换算 + 抖动]
+        C[ADB tap / keyevent]
+    end
+    P --> S --> O --> R
+    R -->|领取奖励| T --> C --> P
+    R -->|N秒后可领| W[休眠 N 秒] --> O
+    R -->|直播间特征| B[返回退出] --> P
 ```
 
-| 环节 | 技术 |
+<details>
+<summary><b>技术选型一览</b></summary>
+
+| 层级 | 方案 |
 |------|------|
-| 画面来源 | `adb screencap` / **scrcpy H.264**（命名管道 + PyAV） |
-| 文字识别 | **RapidOCR**（PP-OCRv4 ONNX，本地推理） |
-| 设备控制 | `adb shell input tap / keyevent` |
-| 防检测 | 坐标抖动、时间间隔浮动、点击前微延迟 |
+| 画面 | ADB screencap / scrcpy（命名管道 + PyAV 解码） |
+| 识别 | RapidOCR · PP-OCRv4 ONNX · 本地推理 |
+| 控制 | adb shell `input tap` / `keyevent` |
+| 界面 | Tkinter 深色面板 |
+| 防检测 | 高斯感抖动、随机节拍 |
+
+</details>
 
 ---
 
-## 🚀 快速开始
+## Quick Start
 
-### 0. 环境要求
-
-| 项目 | 要求 |
-|------|------|
-| 手机 | Android 8+，已开 USB 调试（部分机型需「模拟点击」） |
-| 电脑 | Windows 10+ / Linux / macOS |
-| Python | 3.9 – 3.12 |
-| adb | platform-tools（或放项目 `platform-tools/`） |
-| 可选 | [scrcpy](https://github.com/Genymobile/scrcpy)（高帧率预览） |
-
-### 1. 克隆项目
+> **前置：** Android 手机开 USB 调试 · 电脑有 Python 3.9+ · [platform-tools](https://developer.android.com/tools/releases/platform-tools)
 
 ```bash
+# 1. 获取代码
 git clone https://github.com/52mfan/qishui-ad-auto.git
 cd qishui-ad-auto
-```
 
-### 2. 安装依赖
-
-```bash
+# 2. 装依赖
 pip install -r requirements.txt
-```
 
-国内可换源：
-
-```bash
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
-### 3. 手机开启调试
-
-1. **设置 → 关于手机** → 连点 **版本号** 7 次  
-2. **开发者选项** → 打开 **USB 调试**  
-3. 小米 / vivo 等请再开 **USB 调试（安全设置）** / **允许模拟点击**  
-4. 连接电脑，手机弹窗点 **允许**  
-5. 验证：`adb devices` 显示 `device`
-
-> 详细步骤见 [docs/01-手机设置.md](docs/01-手机设置.md)
-
-### 4. 运行
-
-```bash
-# 图形界面（推荐）
+# 3. 启动
 python qishui_ad_gui.py
-
-# 或命令行
-python qishui_ad_bot.py
 ```
 
-Windows 也可双击 `启动.bat`。
+<details>
+<summary><b>手机端要做什么？</b></summary>
 
-### 5. 开始挂机
+1. 设置 → 关于手机 → 连点版本号 7 次  
+2. 开发者选项 → **USB 调试**  
+3. 小米 / vivo 额外打开 **允许模拟点击**  
+4. 连接电脑，弹窗点「允许」  
+5. `adb devices` 看到 `device` 即可  
 
-1. 手机打开 **汽水音乐 → 看广告领时长** 页面  
-2. 点 GUI **「启动」**（或等 CLI 开始识别）  
-3. 看到日志 `🎯 点击「领取奖励」` 即成功  
-4. 停止：GUI 点「停止」/ CLI 按 `Ctrl+C`
+详细：[docs/01-手机设置.md](docs/01-手机设置.md)
+
+</details>
+
+**然后：** 打开汽水音乐「看广告领时长」→ 点 GUI **启动** → 完事。
+
+```
+🎯 点击「领取奖励」 score=1.00 @ (542,1235)
+⏱ 广告倒计时 14s，等待 13.8s 后探查领取奖励
+⚡ 「领取成功」已点，立即继续识别
+```
 
 ---
 
-## 📚 详细文档
+## Preview
 
-| 文档 | 内容 |
-|------|------|
-| [docs/01-手机设置.md](docs/01-手机设置.md) | 开发者选项、USB 调试、厂商差异 |
-| [docs/02-电脑环境.md](docs/02-电脑环境.md) | Python、pip、adb、可选 scrcpy |
-| [docs/03-使用教程.md](docs/03-使用教程.md) | GUI 区域说明、行为逻辑、排错 |
-| [docs/04-打包EXE.md](docs/04-打包EXE.md) | PyInstaller 单文件打包与发布 |
+```
+┌──────────────────────┬────────────────────────────┐
+│  实时影像            │  手机信息                   │
+│  ┌────────────┐      │  Xiaomi M2007J1SC           │
+│  │  广告中…   │      │  Android 13 · 1080×2340     │
+│  │  14秒后可领│      │  🔋 97%  ⚡ 充电中           │
+│  │            │      │  📶 WiFi · 192.168.37.27    │
+│  └────────────┘      ├────────────────────────────┤
+│  scrcpy · 30fps      │  重点识别                   │
+│                      │  领取奖励   1.00            │
+│                      │  继续观看   0.99            │
+│                      ├────────────────────────────┤
+│                      │  运行日志                   │
+│                      │  🎯 点击「领取奖励」…       │
+└──────────────────────┴────────────────────────────┘
+```
 
 ---
 
-## 📦 项目结构
+## Config
+
+改源码顶部常量即可，无需改逻辑：
+
+```python
+TARGETS = ["领取奖励", "领取", "继续观看", "领取成功", "我知道了"]
+OCR_SCORE = 0.55          # 识别置信度
+CLICK_JITTER = 6          # 点击抖动（像素）
+POLL_INTERVAL = 1.2       # 轮询间隔（秒）
+```
+
+---
+
+## Docs
+
+| | |
+|:--|:--|
+| 📱 [手机设置](docs/01-手机设置.md) | 开发者选项 · USB 调试 · 厂商差异 |
+| 💻 [电脑环境](docs/02-电脑环境.md) | Python · 依赖 · adb · scrcpy |
+| 📘 [使用教程](docs/03-使用教程.md) | GUI 说明 · 行为逻辑 · 排错 |
+| 📦 [打包 EXE](docs/04-打包EXE.md) | PyInstaller 单文件发布 |
+
+---
+
+## FAQ
+
+**Q. 会误点倒计时文字吗？**  
+不会。「14秒后可领奖励」只会触发等待，不会点击。
+
+**Q. 识别到却不点？**  
+日志看 `拒绝: … 出界`，放宽 `TARGET_ROI` 即可。
+
+**Q. 预览只有 1～2 FPS？**  
+没装 scrcpy 时走截图通道，不影响点击；装上 scrcpy 可到约 30 FPS。
+
+**Q. 支持哪些机型？**  
+理论支持所有能开 USB 调试的 Android 8+。小米请开「安全设置」里的模拟点击。
+
+**Q. 会封号吗？**  
+本工具仅做屏幕识别与点击模拟，请遵守平台协议、控制频率、自负风险。
+
+---
+
+## Project
 
 ```
 qishui-ad-auto/
-├── README.md                 # 本文件
-├── LICENSE                   # MIT
+├── qishui_ad_gui.py      # GUI
+├── qishui_ad_bot.py      # CLI
+├── live_screen.py        # 画面采集
 ├── requirements.txt
 ├── 启动.bat
-├── qishui_ad_gui.py          # GUI 版（推荐）
-├── qishui_ad_bot.py          # 命令行版
-├── live_screen.py            # 实时影像（scrcpy / 截图回退）
-└── docs/
-    ├── 01-手机设置.md
-    ├── 02-电脑环境.md
-    ├── 03-使用教程.md
-    └── 04-打包EXE.md
+└── docs/                 # 中文教程
 ```
 
 ---
 
-## ⚙️ 可配置项
+## Disclaimer
 
-源码顶部集中配置，开箱即用，也可自行微调：
-
-| 配置 | 默认 | 说明 |
-|------|------|------|
-| `TARGETS` | 领取奖励… | 点击目标优先级 |
-| `OCR_SCORE` | 0.55 | OCR 置信度下限 |
-| `TARGET_ROI` | 中下区域 | 按钮允许出现范围 |
-| `POLL_INTERVAL` | 1.2s | 识别轮询（±随机浮动） |
-| `CLICK_JITTER` | 6px | 点击坐标随机抖动 |
-| `MISS_BACK_THRESHOLD` | 6 | 连续未命中防卡死 |
+> 本项目仅供学习、研究与个人效率用途。  
+> 请遵守目标应用用户协议与法律法规，勿用于批量滥用。  
+> 使用本软件的一切后果由使用者自行承担。
 
 ---
 
-## ❓ 常见问题
+## License
 
-<details>
-<summary><b>adb devices 是空的 / unauthorized？</b></summary>
+[MIT](LICENSE)
 
-- 换原装数据线，换 USB 口  
-- 手机弹窗勾选「一律允许」  
-- 小米需登录账号后打开「USB 调试（安全设置）」  
-- 见 [docs/01-手机设置.md](docs/01-手机设置.md)
-
-</details>
-
-<details>
-<summary><b>识别到了却不点击？</b></summary>
-
-日志若出现 `拒绝: … 出界`，说明按钮不在 ROI 内。  
-放宽 `qishui_ad_gui.py` 中 `TARGET_ROI` 的 `y` 范围（如 `0.10 ~ 0.98`）。
-
-</details>
-
-<details>
-<summary><b>预览很卡 / 只有 1.5 FPS？</b></summary>
-
-未使用 scrcpy 时为截图模式，约 1.5 FPS，**不影响点击**。  
-安装 scrcpy 并放到程序同级 `scrcpy/` 目录后可达约 30 FPS。
-
-</details>
-
-<details>
-<summary><b>会误点「14秒后可领奖励」吗？</b></summary>
-
-不会。倒计时文案会被识别为**等待信号**，休眠对应秒数后再探查真正的「领取奖励」按钮。
-
-</details>
-
-<details>
-<summary><b>如何打包成 EXE？</b></summary>
-
-见 [docs/04-打包EXE.md](docs/04-打包EXE.md)。GUI 版用 `--windowed`，体积约 100MB+（含 OCR 模型）属正常。
-
-</details>
-
----
-
-## 🤝 贡献
-
-欢迎 Issue / PR：
-
-- 提高 OCR 准确率与 ROI 策略  
-- 支持更多活动页面文案  
-- 优化 scrcpy 流稳定性  
-- 文档与打包体验改进
-
----
-
-## ⚠️ 免责声明
-
-本项目仅供 **学习、研究与个人自动化效率** 使用。  
-
-- 请遵守目标应用的用户协议与当地法律法规  
-- 不得用于破坏服务公平性、批量滥用或其他违规用途  
-- 使用本软件产生的一切后果由使用者自行承担  
-- 作者不对任何账号封禁、财产损失等负责  
-
-**使用即表示你已阅读并同意上述声明。**
-
----
-
-## 📄 License
-
-[MIT License](LICENSE) © 2026 qishui-ad-auto contributors
-
----
+<br/>
 
 <div align="center">
 
-如果这个项目对你有帮助，欢迎点个 ⭐ Star 支持一下
+**如果对你有用，点个 Star ⭐ 支持一下**
+
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=52mfan.qishui-ad-auto)
 
 </div>
